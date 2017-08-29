@@ -23,11 +23,15 @@ for (var i = 0; i < word1.length; i++){
 
 //create variable for players letter guess, keyboard input
 
-document.addEventListener("keyup", function(event){
+var p = document.addEventListener("keyup", function(event){
 	var playerGuess = (event.key);
 	letterCheck(playerGuess);
-})
+	if (letterCheck == true){
+	return playerGuess
+}
 
+	
+})
 
 
 //create function to check if playerGuess is in word1
@@ -46,28 +50,23 @@ function letterCheck(letter){
 		
 }
 
-function getAllIndexes(arr, val) {
+//if statement that replaces dash of the new array with the letters from player guess when lettercheck is true
+
+	function getAllIndexes(arr, val) {
+
     i;
-    for(i = 0; i < arr.length; i++)
-        if (arr[i] === val)
-            indexes.push(i);
-    return indexes;
+    for(i = 0; i < arr.length; i++){
+        if (arr[i] === val){
+            newDashArray[i]==p
+        }
+    }
+    return newDashArray;
+
 
 }
 
 
-//var indexes = getAllIndexes(Cars, "Nano");
 
-//if statement that replaces dash of the new array with the letters from player guess when lettercheck is true
-//set playerGuess == newDashArray[i]
-
-//var dashIndex = newDashArray.indexOf("_ ");
-//if (letterCheck == true ){word1.forEach(function(){})
-
-	//create function to return indexes and values
-//when value matches letter check/playerGuess
-//run function to return indexes and values of dashes array
-//update dashes array where indexes= indexs of 
 
 
 
