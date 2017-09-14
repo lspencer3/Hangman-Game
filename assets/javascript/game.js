@@ -40,12 +40,17 @@ function getWord() {
 			iDashes.setAttribute("id",i)
 
 		if (gameWord[i] === " "){
-				iDashes.innerHTML = " "
+				
+				iDashes.innerHTML = " " + " "
+
+				//add to counter for spaces
 				counter ++
 			}
+
 		else {
-				iDashes.innerHTML = "_ "
+				iDashes.innerHTML = "_"  + " "
 			}
+
 		list.appendChild(iDashes)
 
 	    document.getElementById("word").appendChild(list)
@@ -62,68 +67,92 @@ document.addEventListener('DOMContentLoaded', function() {
 	//create variable for player's letter guess, keyboard input and check player guess with word index then replace dash
 	document.addEventListener("keyup", function(event) {
 		
-		playerGuess = event.key
+		//exclude non letter keys
+		if (event.which >= 65 && event.which <= 90) {
 
-		if (guessed.includes(playerGuess)) {
+			playerGuess = event.key
 
-			alert("Already Guessed !")  
-		}
-		//show guessed letters in HTML
-		else if (gameWord.includes(playerGuess)) {
+			if (guessed.includes(playerGuess)) {
+
+				alert("Already Guessed !")  
+			}
+			//show guessed letters in HTML
+			else if (gameWord.includes(playerGuess)) {
+				
+				guessed.push(playerGuess)
+
+				var l = document.getElementById("letters")
+
+				l.innerHTML=guessed.join(" ")
+					
+				for (var i = 0; i < gameWord.length; i++) { 
+				
+					if (playerGuess == gameWord[i]) {
+
+						document.getElementById(i).innerHTML = playerGuess
 			
-			guessed.push(playerGuess)
-
-			var l = document.getElementById("letters")
-
-			l.innerHTML=guessed.join(" ")
-		
-		
-			for (var i = 0; i < gameWord.length; i++) { 
+						//add counter for correct guesses so that the game knows when there is a win
+						counter+=1
 			
-				if (playerGuess == gameWord[i]) {
-
-					document.getElementById(i).innerHTML = playerGuess
-		
-					//add counter for correct guesses so that the game knows when there is a win
-					counter+=1
-		
-					console.log(counter)
+						console.log(counter)
+					}
 				}
 			}
-		}
-		if (gameWord.length === counter) {
-		
-			alert("you got it")
+			else if (gameWord.includes(playerGuess) == false) {
 
-			//play song for song guessed
+				console.log(playerGuess)
+					
+				guesses++
 
-			//remove song already played and redisplay new word if all letters are guessed under guess limit
-			songs.splice(songs.indexOf(gameWord), 1)
+				guessed.push(playerGuess)
 
-			gameWord = songs[Math.floor(Math.random()*songs.length)]
+				var l = document.getElementById("letters")
 
-			console.log(gameWord)
+				l.innerHTML=guessed.join(" ")
+			}
+			if (guesses == 12) {
 
-			//reset all html and variables and rerun function
-			document.getElementById("word").innerHTML = ""
+				alert("Aw! Out of Guesses!" +" " + "The song was" + " " + "\"" + gameWord.join("") + "\"")
 
-			document.getElementById("letters").innerHTML = ""
-				
-			counter = 0;
+				//reset all html and variables and rerun function
+				document.getElementById("word").innerHTML = ""
 
-			guessed = [];
-				
-			getWord();
-		}
-		if (gameWord.includes(playerGuess) == false) {
+				document.getElementById("letters").innerHTML = ""
+					
+				counter = 0;
 
-			console.log(playerGuess)
-				
-			guesses++
-		}
-		if (guesses == 20) {
+				guesses = 0;
 
-			alert("Aw! Out of Guesses!")
+				guessed = [];
+					
+				getWord();
+			}
+			if (gameWord.length === counter) {
+			
+				alert("you got it")
+
+				//play song for song guessed
+
+				//remove song already played and redisplay new word if all letters are guessed under guess limit
+				songs.splice(songs.indexOf(gameWord), 1)
+
+				gameWord = songs[Math.floor(Math.random()*songs.length)]
+
+				console.log(gameWord)
+
+				//reset all html and variables and rerun function
+				document.getElementById("word").innerHTML = ""
+
+				document.getElementById("letters").innerHTML = ""
+					
+				counter = 0;
+
+				guessed = [];
+
+				guesses = 0;
+					
+				getWord();
+			}
 		}
 	});
 });
