@@ -1,5 +1,46 @@
 #word li {
     list-style-type: none;
-    margin: 0;
+    margin: 5px;
     float:left;
+    font-weight: bold;
+    font-size: 40;
+}
+
+#word ul{
+	position:relative;
+	top:150px;
+}
+
+
+
+#game{
+	background-color: rgba(166, 166, 166,.8);
+	margin: 150px;
+	color:rgb(0, 0, 255);
+	text-align: center;
+	height: 400px;
+
+}
+
+h1{
+	position:relative;
+	top:30px;
+}
+.info{
+	position:relative;
+	top: 100px;
+}
+
+#results{
+	position:relative;
+	top:150px;
+	font-weight: bold;
+	font-size: 40;
+
+}
+
+.wordsgame{
+	font-weight: bold;
+	font-size: 40;
+
 }

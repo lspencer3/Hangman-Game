@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <title>Hangman</title>
     <link rel = "stylesheet" href ="assets/css/style.css">
+    <style> body {
+    background-image: url("assets/images/music.jpg");
+</style>
   </head>
   <body>
   <div id ="game">
   <h1> Disney Hangman </h1>
   <p> Start typing letters to guess the Disney Song</p>
+  <p id = "results"><p>
   <ul id ="word"></ul>
-  </div>
   <br>
-  <div class ="wordsgame"> <p>Letters Guessed: <p id="letters"></p></p></div>
+  <div class ="wordsgame"><p id ="guesses">Guesses Left: </p> <p>Letters Guessed: <p id="letters"></p></p></div>
+  </div>
   <script src="assets/javascript/game.js"></script>
 </body>
 </html>

@@ -14,10 +14,11 @@ var words = {
 }
 var songs = [words.word1, words.word2, words.word3, words.word4, words.word5, words.word6, words.word7, words.word8, words.word9, words.word10];
 var counter = 0;
-var guesses = 0;
+var guesses = 12;
 
 var gameWord;
 var playerGuess;
+var score;
 
 //create empty array for letters already guessed
 var guessed = []
@@ -25,37 +26,49 @@ var guessed = []
 //create function that loops through the songs.word array to replace html elements created with dashes or spaces 
 function getWord() {
 
-	//randomly loop through songs array to get gameWord
-	gameWord = songs[Math.floor(Math.random()*songs.length)]
+	if (songs == []){
 
-	console.log(gameWord)
+		document.getElementById("word").innerHTML = "Awesome Job!! You guessed" + " " + score + "/10 Disney songs correctly !!"  
+	}
+	
+	else{
 
-	//begin to loop
-	for (var i = 0; i < gameWord.length; i++) { 
+		//reset guesses and display
+		guesses = 12;
 		
-		var list = document.createElement("div")
+		document.getElementById("guesses").innerHTML = guesses
 
-		var iDashes = document.createElement("li");
+		//randomly loop through songs array to get gameWord
+		gameWord = songs[Math.floor(Math.random()*songs.length)]
 
-			iDashes.setAttribute("id",i)
+		console.log(gameWord)
 
-		if (gameWord[i] === " "){
-				
-				iDashes.innerHTML = " " + " "
+		//begin to loop
+		for (var i = 0; i < gameWord.length; i++) { 
+			
+			var list = document.createElement("div")
 
-				//add to counter for spaces
-				counter ++
-			}
+			var iDashes = document.createElement("li");
 
-		else {
-				iDashes.innerHTML = "_"  + " "
-			}
+				iDashes.setAttribute("id",i)
 
-		list.appendChild(iDashes)
+			if (gameWord[i] === " "){
+					
+					iDashes.innerHTML = " " + " " 
 
-	    document.getElementById("word").appendChild(list)
-	};
-	//document.getElementById(i).style.list-style-type = none;
+					//add to counter for spaces
+					counter ++
+				}
+
+			else {
+					iDashes.innerHTML = "_"  + " "
+				}
+
+			list.appendChild(iDashes)
+
+		    document.getElementById("word").appendChild(list)
+		};
+    }
 }
 
 //readying document
@@ -102,7 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				console.log(playerGuess)
 					
-				guesses++
+				guesses--
+
+				document.getElementById("guesses").innerHTML = guesses
 
 				guessed.push(playerGuess)
 
@@ -110,9 +125,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				l.innerHTML=guessed.join(" ")
 			}
-			if (guesses == 12) {
+			if (guesses == 0) {
 
-				alert("Aw! Out of Guesses!" +" " + "The song was" + " " + "\"" + gameWord.join("") + "\"")
+				document.getElementById("results").innerHTML = "Aw! Out of guesses!" +" " + "The song was" + " " + "\"" + gameWord.join("") + "\""
 
 				//reset all html and variables and rerun function
 				document.getElementById("word").innerHTML = ""
@@ -129,7 +144,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 			if (gameWord.length === counter) {
 			
-				alert("you got it")
+				document.getElementById("results").innerHTML = "You got it!!!"
+
+				//add to games won
+				score++
 
 				//play song for song guessed
 
