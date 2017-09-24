@@ -10,7 +10,7 @@ var words = {
 	word7: ["r", "e", "f", "l", "e", "c", "t", "i", "o", "n"],
 	word8: ["j", "u", "s", "t", " ", "a", "r", "o", "u", "n", "d", " ", "t","h", "e", " ", "r", "i" , "v", "e", "r", "b", "e", "n", "d"],
 	word9: ["y", "o", "u", "l", "l", " ", "b", "e", " ", "i", "n", " ", "m","y", " ", "h", "e", "a" , "r", "t"],
-	word10: ["c", "a", "n", " ", "y ", "o", "u", " ", "f", "e", "e", "l", " ","t", "h", "e", " ", "l" , "o", "v","e", " ", "t", "o","n","i", "g","h","t"]
+	word10: ["c", "a", "n", " ", "y", "o", "u", " ", "f", "e", "e", "l", " ","t", "h", "e", " ", "l" , "o", "v","e", " ", "t", "o","n","i", "g","h","t"]
 }
 var songs = [words.word1, words.word2, words.word3, words.word4, words.word5, words.word6, words.word7, words.word8, words.word9, words.word10];
 var counter = 0;
@@ -126,6 +126,9 @@ document.addEventListener('DOMContentLoaded', function() {
 				l.innerHTML=guessed.join(" ")
 			}
 			if (guesses == 0) {
+
+				//remove song already played and redisplay new word if all letters are guessed under guess limit
+				songs.splice(songs.indexOf(gameWord), 1)
 
 				document.getElementById("results").innerHTML = "Aw! Out of guesses!" +" " + "The song was" + " " + "\"" + gameWord.join("") + "\""
 
